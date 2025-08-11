@@ -28,13 +28,12 @@
 - All critical API and UI workflows pass without errors.
 - All assertions in tests are met (e.g., correct status codes, expected UI elements, success messages).
 - No unhandled exceptions or Selenium/requests errors.
-- Coverage meets the minimum threshold (if set).
 
 ## Test Environment
 - **SonarQube Server:**
-  - Remote: `http://34.245.94.33:9000` (or as configured by `BASE_URL`)
+  - Remote: BASE_URL
   - Local: `http://localhost:9000` (for local runs)
-- **Python:** 3.11 or 3.12
+- **Python:** 3.12
 - **Browser:** Google Chrome (latest stable)
 - **Driver:** ChromeDriver (matching Chrome version)
 - **CI:** GitHub Actions (Ubuntu runners)
@@ -51,7 +50,6 @@
 ## Reporting Results
 - **Local:**
   - Pytest output in terminal (verbose mode).
-  - Coverage reports (terminal and XML).
 - **CI:**
   - GitHub Actions job summary.
   - Coverage uploaded to Codecov.
