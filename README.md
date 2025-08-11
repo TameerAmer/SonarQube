@@ -31,7 +31,7 @@
 
 ## Test Environment
 - **SonarQube Server:**
-  - Remote: BASE_URL
+  - Remote: BASE_URL from the .yml file
   - Local: `http://localhost:9000` (for local runs)
 - **Python:** 3.12
 - **Browser:** Google Chrome (latest stable)
