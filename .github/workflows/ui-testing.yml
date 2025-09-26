@@ -200,6 +200,7 @@ jobs:
         github_token: ${{ secrets.SECRET_GITHUB_TOKEN }}
         publish_branch: gh-pages
         publish_dir: allure-report
+        
         # Force an orphan branch publish to ensure the gh-pages branch is replaced
         force_orphan: true
         keep_files: false
