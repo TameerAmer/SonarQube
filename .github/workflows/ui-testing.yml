@@ -179,9 +179,17 @@ jobs:
       run: |
         if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
           rm -rf allure-report || true
-          allure generate allure-results -o allure-report --clean || true
+          # generate will exit non-zero on failure; let it fail the step
+          allure generate allure-results -o allure-report --clean
+          if [ ! -f "allure-report/index.html" ]; then
+            echo "Allure report generation failed: allure-report/index.html missing"
+            echo "Contents of allure-report:" 
+            ls -la allure-report || true
+            exit 1
+          fi
         else
           echo "No allure-results found"
+          exit 1
         fi
 
     - name: Show Allure report index header (diagnostic)
@@ -196,11 +204,12 @@ jobs:
 
     - name: Deploy Allure report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
+      if: ${{ success() }}
       with:
         github_token: ${{ secrets.SECRET_GITHUB_TOKEN }}
         publish_branch: gh-pages
         publish_dir: allure-report
-        
+
         # Force an orphan branch publish to ensure the gh-pages branch is replaced
         force_orphan: true
         keep_files: false
