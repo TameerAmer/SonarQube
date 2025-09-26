@@ -83,7 +83,7 @@ jobs:
           docker compose up -d
           docker compose ps
       env:
-        IMAGE_TAG: $IMAGE_TAG
+        IMAGE_TAG: ${{ secrets.IMAGE_TAG }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         SONARQUBE_USERNAME: ${{ secrets.SONARQUBE_USERNAME }}
         SONARQUBE_PASSWORD: ${{ secrets.SONARQUBE_PASSWORD }}
