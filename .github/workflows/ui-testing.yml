@@ -204,9 +204,11 @@ jobs:
 
     - name: Deploy Allure report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
-      if: ${{ success() }}
+      # Only deploy when the run is not a pull request from a fork (forks do not have access to secrets/GITHUB_TOKEN)
+      if: ${{ success() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
       with:
-        github_token: ${{ secrets.SECRET_GITHUB_TOKEN }}
+        # Use the automatically provided GITHUB_TOKEN for authenticated push; it will be available for non-fork runs
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
         publish_dir: allure-report
 
