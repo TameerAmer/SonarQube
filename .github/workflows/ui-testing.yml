@@ -111,6 +111,25 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+      
+    # Wait for SonarQube UI to be up before running UI tests
+    - name: Wait for SonarQube to be ready
+      steps:
+      - name: Wait for SonarQube UI to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -sS http://localhost:9000 | grep -q '<title>SonarQube'; then
+              echo "SonarQube UI is up!"
+              break
+            fi
+            echo "Waiting for SonarQube UI..."
+            sleep 5
+          done
+          # Final check
+          if ! curl -sS http://localhost:9000 | grep -q '<title>SonarQube'; then
+            echo "SonarQube UI did not become ready in time."
+            exit 1
+          fi
         
     - name: Install Chrome and ChromeDriver
       run: |
