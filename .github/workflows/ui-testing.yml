@@ -64,7 +64,7 @@ jobs:
           OPENAI_API_KEY=$OPENAI_API_KEY
           SONARQUBE_USERNAME=$SONARQUBE_USERNAME
           SONARQUBE_PASSWORD=$SONARQUBE_PASSWORD
-          DB_BACKEND=postgresql
+          DB_BACKEND=postgres
           POSTGRES_HOST=postgres
           POSTGRES_PORT=5432
           POSTGRES_DB=exploitreplayer
