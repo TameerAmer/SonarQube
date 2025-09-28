@@ -1,5 +1,6 @@
 services:
   # ExploitReplayer Application
+  
   app:
     image: tameeramer/exploitreplayer:${IMAGE_TAG}
     container_name: exploitreplayer-app
