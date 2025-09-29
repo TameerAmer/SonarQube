@@ -57,14 +57,14 @@ jobs:
         envs: IMAGE_TAG,OPENAI_API_KEY,SONARQUBE_USERNAME,SONARQUBE_PASSWORD,DOCKERHUB_USERNAME,EC2_HOST
         script: |
           cd /home/ubuntu
-          docker compose down
+          docker compose ls | awk 'NR>1 {print $1}' | xargs -n1 -I{} docker compose -p {} down
 
           # Create or update .env file
           cat > .env <<EOF
           OPENAI_API_KEY=$OPENAI_API_KEY
           SONARQUBE_USERNAME=$SONARQUBE_USERNAME
           SONARQUBE_PASSWORD=$SONARQUBE_PASSWORD
-          DB_BACKEND=postgresql
+          DB_BACKEND=postgres
           POSTGRES_HOST=postgres
           POSTGRES_PORT=5432
           POSTGRES_DB=exploitreplayer
@@ -111,6 +111,22 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+      
+    - name: Wait for SonarQube UI to be ready
+      run: |
+        for i in {1..30}; do
+          if curl -sS http://${{ secrets.EC2_HOST }}:9000 | grep -q '<title>SonarQube'; then
+            echo "SonarQube UI is up!"
+            break
+          fi
+          echo "Waiting for SonarQube UI..."
+          sleep 5
+        done
+        # Final check
+        if ! curl -sS http://${{ secrets.EC2_HOST }}:9000 | grep -q '<title>SonarQube'; then
+          echo "SonarQube UI did not become ready in time."
+          exit 1
+        fi
         
     - name: Install Chrome and ChromeDriver
       run: |
