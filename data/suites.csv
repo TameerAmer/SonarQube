@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","21414","test_create_delete_project","UI_Testing","Sun Oct 05 03:03:12 UTC 2025","passed","Sun Oct 05 03:03:34 UTC 2025","TestCreateDeleteProject","test_create_delete_project","",""
+"","3068","test_login","UI_Testing","Sun Oct 05 03:03:34 UTC 2025","passed","Sun Oct 05 03:03:37 UTC 2025","TestLoginLogout","test_login_logout","",""
+"","1129","test_page_title","UI_Testing","Sun Oct 05 03:03:41 UTC 2025","passed","Sun Oct 05 03:03:42 UTC 2025","TestLoginLogout","test_login_logout","",""
+"","3987","test_logout","UI_Testing","Sun Oct 05 03:03:37 UTC 2025","passed","Sun Oct 05 03:03:41 UTC 2025","TestLoginLogout","test_login_logout","",""
